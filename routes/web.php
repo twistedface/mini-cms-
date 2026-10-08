@@ -14,7 +14,7 @@ Route::get('/bonjour-court', fn () => 'Même résultat, écrit avec une fonction
 
 Route::get('/bienvenue', function () {
     return view('bienvenue', [
-        'etudiant' => 'Maghraoui Amira',
+        'etudiant' => 'amira maghraoui',
         'groupe' => 'MDW33',
         'cours' => 'Atelier Framework Côté Serveur',
     ]);
