@@ -30,8 +30,8 @@ Route::get('/version', fn () => 'Laravel ' . app()->version() . ' - PHP ' . PHP_
 
 Route::get('/heure', function () {
     return view('heure', ['maintenant' => now()]);
+
 });
-<?php
 
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
@@ -46,3 +46,6 @@ Route::get('/heure', function () {
         'date' => now()->format('d/m/Y'),
     ]);
 });
+Route::get('/', [PageController::class, 'home'])->name('home');
+
+Route::get('/a-propos', [PageController::class, 'about'])->name('about');
