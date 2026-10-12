@@ -19,3 +19,30 @@ Route::get('/bienvenue', function () {
         'cours' => 'Atelier Framework Côté Serveur',
     ]);
 });
+
+Route::get('/a-propos', function () {
+    return view('a-propos', [
+        'auteur' => 'amira maghraoui',
+        'groupe' => 'MDW33',
+    ]);
+});
+Route::get('/version', fn () => 'Laravel ' . app()->version() . ' - PHP ' . PHP_VERSION);
+
+Route::get('/heure', function () {
+    return view('heure', ['maintenant' => now()]);
+});
+<?php
+
+use App\Http\Controllers\PageController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', [PageController::class, 'home']);
+
+Route::get('/a-propos', [PageController::class, 'about']);
+
+Route::get('/heure', function () {
+    return view('heure', [
+        'heure' => now()->format('H:i'),
+        'date' => now()->format('d/m/Y'),
+    ]);
+});
