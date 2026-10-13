@@ -1,4 +1,4 @@
-route()
+<x-layout>
     <x-slot:title>{{ $heading }} - Mini-CMS</x-slot:title>
 
         <x-page-header :title="$heading" />
@@ -12,4 +12,4 @@ route()
             </x-alert>
         @endforelse
     </div>
-route()
+</x-layout>

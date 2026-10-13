@@ -1,4 +1,4 @@
-route()
+<x-layout>
     <x-slot:title>À propos - Mini-CMS</x-slot:title>
 
         <x-page-header title="À propos" subtitle="Le projet Mini-CMS et ses objectifs." />
@@ -17,4 +17,4 @@ route()
         <x-alert type="warning" title="Données provisoires">
             Les articles affichés viennent d'un tableau PHP écrit dans le contrôleur. Ils ne sont pas enregistrés.
         </x-alert>
-    </div>route()
+    </div></x-layout>
