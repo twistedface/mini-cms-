@@ -1,4 +1,4 @@
-<x-layout>
+route()
     <x-slot:title>Accueil - Mini-CMS</x-slot:title>
 
     <section class="py-10">
@@ -14,4 +14,4 @@
     <x-alert type="success" title="Sprint en cours">
         Les composants Blade évitent de recopier le même code HTML dans chaque page.
     </x-alert>
-</x-layout>
+route()

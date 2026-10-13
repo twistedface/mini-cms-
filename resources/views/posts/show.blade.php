@@ -1,4 +1,4 @@
-<x-layout>
+route()
     <x-slot:title>{{ $post['title'] }} - Mini-CMS</x-slot:title>
 
     <article class="max-w-2xl">
@@ -13,4 +13,4 @@
             @endforeach
         </div>
     </article>
-</x-layout>
+route()
