@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class PostController extends Controller
 
     public function create(): View
     {
-        return view('posts.create');
+        return view('posts.create', [
+            'categories' => Category::orderBy('name')->get(),
+        ]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -39,6 +42,7 @@ class PostController extends Controller
             'excerpt' => ['nullable', 'string', 'max:255'],
             'body' => ['required', 'string', 'min:20'],
             'is_published' => ['nullable', 'boolean'],
+            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
         ]);
 
         $validated['is_published'] = $request->boolean('is_published');
@@ -53,12 +57,25 @@ class PostController extends Controller
     {
         $post->load('user', 'category', 'tags');
 
-        return view('posts.show', compact('post'));
+        $related = $post->category
+            ? $post->category->posts()
+                ->published()
+                ->where('id', '!=', $post->id)
+                ->with('user', 'category', 'tags')
+                ->latest('published_at')
+                ->take(3)
+                ->get()
+            : collect();
+
+        return view('posts.show', compact('post', 'related'));
     }
 
     public function edit(Post $post): View
     {
-        return view('posts.edit', compact('post'));
+        return view('posts.edit', [
+            'post' => $post,
+            'categories' => Category::orderBy('name')->get(),
+        ]);
     }
 
     public function update(Request $request, Post $post): RedirectResponse
@@ -69,6 +86,7 @@ class PostController extends Controller
             'excerpt' => ['nullable', 'string', 'max:255'],
             'body' => ['required', 'string', 'min:20'],
             'is_published' => ['nullable', 'boolean'],
+            'category_id' => ['nullable', 'integer', 'exists:categories,id'],
         ]);
 
         $validated['is_published'] = $request->boolean('is_published');
