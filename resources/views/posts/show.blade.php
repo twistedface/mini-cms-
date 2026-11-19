@@ -43,4 +43,16 @@
             </details>
         </div>
     </article>
+
+    @if ($related->isNotEmpty())
+        <section class="mt-10">
+            <h2 class="text-2xl font-bold mb-4">Dans la même catégorie</h2>
+
+            <div class="grid gap-6 md:grid-cols-2">
+                @foreach ($related as $relatedPost)
+                    <x-post-card :post="$relatedPost" />
+                @endforeach
+            </div>
+        </section>
+    @endif
 </x-layout>
